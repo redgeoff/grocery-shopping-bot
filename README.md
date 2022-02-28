@@ -28,7 +28,7 @@ And, to stop (in a separate terminal):
 ### Run
 
     $ python3 -m pipenv shell
-    $ shop/run.sh
+    $ ./scripts/run.sh
 
 ## Delpoy to AWS
 
