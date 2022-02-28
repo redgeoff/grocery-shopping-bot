@@ -10,8 +10,8 @@
     "type": "git",
     "url": "git+https://github.com/redgeoff/grocery-shopping-bot.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Geoff Cox",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/redgeoff/grocery-shopping-bot/issues"
   },
@@ -23,6 +23,7 @@
     "ask-sdk-model": "^1.37.2"
   },
   "devDependencies": {
+    "serverless": "^3.5.1",
     "serverless-plugin-scripts": "^1.0.2",
     "serverless-prune-plugin": "^2.0.1"
   }
