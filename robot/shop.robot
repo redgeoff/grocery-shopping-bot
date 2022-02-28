@@ -9,6 +9,7 @@ Resource          ./email.robot
 
 *** Test Cases ***
 Shop
+    Open Browser Profiled    about:blank
     Shop For Groceries
     # Clear Cart
     # [Teardown]    Close Browser
@@ -43,6 +44,5 @@ Mark Todoist List Completed
 
 # For debugging
 Clear Cart
-    Open Browser Profiled    about:blank
     Log In Or Open Safeway    ${SAFEWAY_EMAIL}    ${SAFEWAY_PASSWORD}
     Clear Safeway Cart

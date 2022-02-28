@@ -26,7 +26,7 @@ Log In To Todoist
 # Otherwise, we'll resume the previous browser session
 Log In Or Open Todoist Inner
     [Arguments]    ${email}   ${password}
-    Open Browser Profiled   ${TODOIST_TODAY}
+    Go To   ${TODOIST_TODAY}
     Wait Until Page Contains Element   xpath=//*[.='Log in' or .='Today']   # Wait for page to settle
     Acknowledge Session Expiration If Needed
     ${logged_in}=    Run Keyword And Return Status   Title Should Be   ${TODOIST_TODAY_TITLE}

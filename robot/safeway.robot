@@ -15,17 +15,33 @@ ${SAFEWAY_CART_URL}    https://www.safeway.com/erums/cart
 
 Log In Or Open Safeway
     [Arguments]    ${email}   ${password}
-    #Open Browser Profiled   ${SAFEWAY_HOMEPAGE}
     Go To   ${SAFEWAY_HOMEPAGE}
     Wait Until Page Contains Element   xpath=//*[.='Account' or .='Sign In']   # Wait for page to settle
     ${logged_in}=    Run Keyword And Return Status   Page Should Contain Element   xpath=//*[.='Account']
     Run Keyword Unless    ${logged_in}    Log In To Safeway   ${email}   ${password}
 
-Dimiss Continue Popup If Needed
+Dismiss Continue Popup If Needed
     ${popup_displayed}=    Run Keyword And Return Status   Page Should Contain Element   xpath=//*[.='How would you like to continue?']
     IF    '${popup_displayed}'=='True'
         Click Element When Ready   Continue
     END
+
+Dismiss Delivery Popup If Needed
+    ${popup_displayed}=    Run Keyword And Return Status   Page Should Contain Element   xpath=//*[.='Please Select Delivery or Pickup to Continue Shopping']
+    IF    '${popup_displayed}'=='True'
+        #Click Element When Ready   //button[@id='closeFulfillmentModalButton']
+        #Click Element When Ready   //button[@data-qa='hmpg-flfllmntmdl-glctricn']
+        Wait Until Element Ready    //input[contains(@class, 'input-search fulfillment-content__search-wrapper__input')]
+        Input Password    //input[contains(@class, 'input-search fulfillment-content__search-wrapper__input')]    ${ZIP_CODE}
+        Click Element When Ready   //*[@data-qa='hmpg-flfllmntmdl-zipcode']
+        Mouse Over    //*[@data-qa='hmpg-flfllmntmdl-shpdlivrybttn']
+        Sleep    1
+        Click Element When Ready   //*[@data-qa='hmpg-flfllmntmdl-shpdlivrybttn']
+    END
+
+Dismiss Popups If Needed
+    Dismiss Continue Popup If Needed
+    Dismiss Delivery Popup If Needed
 
 Log In To Safeway
     [Arguments]    ${email}   ${password}
@@ -36,7 +52,7 @@ Log In To Safeway
     Wait Until Keyword Succeeds    5x    2 sec    Input Password          label-password                ${password}
     Click Element           xpath=//input[@id='btnSignIn']
     Wait Until Page Contains Element   xpath=//*[.='Account']    timeout=10s    # Wait for page to settle
-    Dimiss Continue Popup If Needed
+    Dismiss Popups If Needed
 
 Capture List
     @{locators}=     Get WebElements    xpath=//product-item-v2
@@ -59,6 +75,7 @@ Capture List
 Get Buy It Again Items
     [Arguments]   ${max_pages}
     Go To   ${SAFEWAY_BUY_IT_AGAIN_URL}
+    Dismiss Popups If Needed
     Load More Items   ${max_pages}
     ${items}=      Capture List
     [Return]    ${items}
@@ -74,6 +91,9 @@ Load More Items
 
 Add To Cart
     [Arguments]   ${item_id}
+
+    Dismiss Popups If Needed
+
     Wait Until Element Ready    //*[@id='addButton_${item_id}']
 
     # Safeway requires a mouse over before the item can be added to the cart
