@@ -1,0 +1,29 @@
+{
+  "name": "grocery-shopping-bot",
+  "version": "1.0.0",
+  "description": "Convert Alexa shopping list to Safeway cart",
+  "main": "alexa/shop.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/redgeoff/grocery-shopping-bot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/redgeoff/grocery-shopping-bot/issues"
+  },
+  "homepage": "https://github.com/redgeoff/grocery-shopping-bot#readme",
+  "dependencies": {
+    "@aws-sdk/client-batch": "^3.52.0",
+    "ask-sdk": "^2.12.0",
+    "ask-sdk-core": "^2.12.0",
+    "ask-sdk-model": "^1.37.2"
+  },
+  "devDependencies": {
+    "serverless-plugin-scripts": "^1.0.2",
+    "serverless-prune-plugin": "^2.0.1"
+  }
+}

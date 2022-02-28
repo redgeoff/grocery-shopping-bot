@@ -1,0 +1,82 @@
+Resources:
+    BatchServiceRole:
+      Type: AWS::IAM::Role
+      Properties:
+        AssumeRolePolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+              - batch.amazonaws.com
+              - ecs-tasks.amazonaws.com
+            Action:
+            - sts:AssumeRole
+        ManagedPolicyArns:
+          - arn:aws:iam::aws:policy/service-role/AWSBatchServiceRole
+          - arn:aws:iam::aws:policy/SecretsManagerReadWrite
+          - arn:aws:iam::aws:policy/CloudWatchLogsFullAccess
+          - arn:aws:iam::aws:policy/AmazonSSMFullAccess
+          - arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy
+
+    BatchComputeEnv:
+      Type: AWS::Batch::ComputeEnvironment
+      Properties:
+        Type: MANAGED
+        ServiceRole: !GetAtt BatchServiceRole.Arn
+        ComputeEnvironmentName: ${self:custom.batch.computeEnv}
+        ComputeResources:
+          MaxvCpus: 256
+          SecurityGroupIds: ${self:custom.env.aws.securityGroupIds}
+          Subnets: ${self:custom.env.aws.subnets}
+          Type: FARGATE_SPOT
+        State: ENABLED
+
+    BatchJobQueue:
+      Type: AWS::Batch::JobQueue
+      Properties:
+        JobQueueName: ${self:custom.batch.jobQueue}
+        ComputeEnvironmentOrder:
+          - Order: 1
+            ComputeEnvironment: !Ref BatchComputeEnv
+        State: ENABLED
+        Priority: 1
+
+    BatchJobDefinition:
+      Type: AWS::Batch::JobDefinition
+      Properties:
+        Type: container
+        JobDefinitionName: ${self:custom.batch.jobDefinition}
+        PlatformCapabilities:
+          - FARGATE
+        ContainerProperties:
+          ResourceRequirements:
+           - Type: "VCPU"
+             Value: "1"
+           - Type: "MEMORY"
+             Value: "2048"
+          Image: !Sub ${AWS::AccountId}.dkr.ecr.${AWS::Region}.amazonaws.com/serverless-${self:service}-${self:custom.STAGE}:appimage
+          ExecutionRoleArn: !GetAtt BatchServiceRole.Arn
+          NetworkConfiguration:
+            AssignPublicIp: ENABLED
+
+    # Note: cannot use as this creates a name conflict on the ECR instance
+    # BatchECR:
+    #   Type: "AWS::ECR::Repository"
+    #   Properties:
+    #     RepositoryName: serverless-${self:service}-${self:custom.STAGE}-tmp
+    #     LifecyclePolicy:
+    #       LifecyclePolicyText: |
+    #         {
+    #           "rules": [
+    #           {
+    #             "rulePriority": 1,
+    #             "description": "Only keep 5 images",
+    #             "selection": {
+    #               "tagStatus": "any",
+    #               "countType": "imageCountMoreThan",
+    #               "countNumber": 5
+    #             },
+    #             "action": { "type": "expire" }
+    #           }]
+    #         }

@@ -1,0 +1,69 @@
+service: grocery-shopping-bot
+
+frameworkVersion: '3'
+
+package:
+  patterns:
+    - "!robot/**"
+    - "!.env.*"
+
+provider:
+  name: aws
+
+  ecr:
+    images:
+      appimage:
+        path: ./
+
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - "batch:*"
+          Resource: "*"
+
+  # TODO: remove as this prevents output of Alexa Skill Lambda ARN
+  # Avoid needing to prune previous versions of Lambda by only keeping the latest version
+  #versionFunctions: false
+
+custom:
+  STAGE: ${opt:stage, 'dev'}
+
+  batch:
+    computeEnv: ${self:service}-compute-env-${self:custom.STAGE}
+    jobQueue: ${self:service}-job-queue-${self:custom.STAGE}
+    jobDefinition: ${self:service}-job-definition-${self:custom.STAGE}
+
+  # Automatically prune versions of the Lambda or else we'll reach our max
+  prune:
+    automatic: true
+    number: 3
+
+  scripts:
+    hooks:
+      'deploy:finalize': ./install-ecr-lifecycle.sh
+
+  env: ${file(.env.${self:custom.STAGE}.yml):}
+
+resources:
+   - ${file(batch.yml)}
+
+# Note: still need this for now as need to trigger serverless framework to build image and create ECR instance
+functions:
+  hello:
+    image:
+      name: appimage
+
+  shop:
+    handler: alexa/shop.handler
+    environment:
+      ACCOUNT_ID: !Sub ${AWS::AccountId}
+      JOB_QUEUE_NAME: ${self:custom.batch.jobQueue}
+      JOB_DEFINITION_NAME: ${self:custom.batch.jobDefinition}
+    events:
+      - alexaSkill: ${self:custom.env.alexaSkillId}
+
+plugins:
+  - serverless-prune-plugin
+  - serverless-plugin-scripts

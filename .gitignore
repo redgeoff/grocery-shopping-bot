@@ -1,0 +1,7 @@
+.DS_Store
+.serverless
+node_modules
+.env.dev.yml
+env.robot.yml
+output/*
+yarn-error.log

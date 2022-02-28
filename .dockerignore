@@ -1,0 +1,7 @@
+output/*
+.serverless
+serverless.yml
+batch.yml
+node_modules
+.env.*
+yarn-error.log

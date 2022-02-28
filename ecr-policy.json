@@ -1,0 +1,16 @@
+{
+  "rules": [
+      {
+          "rulePriority": 1,
+          "description": "Only keep 5 images",
+          "selection": {
+            "tagStatus": "any",
+            "countType": "imageCountMoreThan",
+            "countNumber": 5
+          },
+          "action": {
+              "type": "expire"
+          }
+      }
+  ]
+}
