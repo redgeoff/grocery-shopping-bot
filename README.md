@@ -1,6 +1,6 @@
 # Grocery Shopping Bot
 
-A bot that takes your Alexa shopping list and uses it to populate an online Safeway shopping cart.
+A [Robot Framework](https://robotframework.org/) bot that takes your Alexa shopping list and uses it to populate an online Safeway shopping cart.
 
 ## Run locally with docker
 
