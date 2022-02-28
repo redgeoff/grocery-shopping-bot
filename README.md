@@ -2,7 +2,7 @@
 
 A [Robot Framework](https://robotframework.org/) bot that takes your Alexa shopping list and uses it to populate an online Safeway shopping cart.
 
-## Run locally with docker
+## Run locally with Docker
 
 First build:
 
@@ -16,7 +16,7 @@ And, to stop (in a separate terminal):
 
     $ ./scripts/stop-docker.sh
 
-## Run locally without docker
+## Run locally without Docker
 
 ### Setup
 
