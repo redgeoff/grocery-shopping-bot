@@ -6,6 +6,19 @@ Library           Email.py
 
 *** Keywords ***
 
+# Note: the RPA framework developed by Robocorp doesn't play nicely with the
+# ppodgorsek/robot-framework Docker image so we instead use a custom Python script, Email.py, to
+# send the email
+#
+# RPA Send Html Email
+#     [Arguments]    ${smtp_username}    ${smtp_password}    ${smtp_server}    ${smtp_port}    ${email_recipient}    ${subject}    ${body}
+#     Authorize    account=${smtp_username}    password=${smtp_password}   smtp_server=${smtp_server}    smtp_port=${smtp_port}
+#     Send Message    sender=${smtp_username}
+#     ...    recipients=${email_recipient}
+#     ...    subject=${subject}
+#     ...    html=True
+#     ...    body=${body}
+
 Send Email
     [Arguments]    ${smtp_username}    ${smtp_password}    ${smtp_server}    ${smtp_port}    ${email_recipient}    ${items_in_cart}
     ${date}=      Get Current Date      UTC      exclude_millis=yes
@@ -19,11 +32,5 @@ Send Email
     END
     ${body}=    Catenate    ${body}    </table>
 
-    # Authorize    account=${smtp_username}    password=${smtp_password}   smtp_server=${smtp_server}    smtp_port=${smtp_port}
-    # Send Message    sender=${smtp_username}
-    # ...    recipients=${email_recipient}
-    # ...    subject=Grocery shopping bot ${converted_date}
-    # ...    html=True
-    # ...    body=${body}
-
+    # RPA Send Html Email    ${smtp_username}    ${smtp_password}    ${smtp_server}    ${smtp_port}    ${email_recipient}    Grocery shopping bot ${converted_date}    ${body}
     Send Html Email    ${smtp_username}    ${smtp_password}    ${smtp_server}    ${smtp_port}    ${email_recipient}    Grocery shopping bot ${converted_date}    ${body}
