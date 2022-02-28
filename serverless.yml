@@ -42,7 +42,7 @@ custom:
 
   scripts:
     hooks:
-      'deploy:finalize': ./install-ecr-lifecycle.sh
+      'deploy:finalize': ./scripts/install-ecr-lifecycle.sh
 
   env: ${file(.env.${self:custom.STAGE}.yml):}
 
