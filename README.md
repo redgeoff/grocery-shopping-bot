@@ -64,7 +64,8 @@ And, to stop (in a separate terminal):
 
 Note: this can take over 10 minutes to deploy the first time
 
-1. `serverless deploy --verbose`
+1. `yarn`
+1. `npx serverless deploy --verbose`
 1. Copy the outputted value for `ShopLambdaFunctionQualifiedArn`
 
 #### Configure the Alexa skill Lambda ARN
@@ -83,8 +84,8 @@ Simply say _Alexa, open Grocery Shopping Bot_
 
 ### Subsequent Deployments
 
-Change the desired files and then run `serverless deploy --verbose`
+Change the desired files and then run `npx serverless deploy --verbose`
 
 ## Remove from AWS
 
-    $ serverless remove --verbose
+    $ npx serverless remove --verbose
