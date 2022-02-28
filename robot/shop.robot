@@ -19,14 +19,6 @@ Shop For Groceries
     ${items_to_buy}=   Get List From Todoist
     ${items_in_cart}=   Add To Safeway Cart   ${items_to_buy}
     Mark Todoist List Completed    ${items_in_cart}
-
-    # TODO: remove
-    # ${items_in_cart}=       Create List
-    # ${item}=    Create Dictionary   name=pretzels    name_in_store=SuperPretzel Soft Pretzels Fully Baked Original - 13 Oz
-    # Append To List    ${items_in_cart}   ${item}
-    # ${item}=    Create Dictionary   name=salsa    name_in_store=Signature Cafe Salsa Fresca Hot - 16 Oz
-    # Append To List    ${items_in_cart}   ${item}
-
     Send Email    ${SMTP_USERNAME}    ${SMTP_PASSWORD}    ${SMTP_SERVER}    ${SMTP_PORT}    ${EMAIL_RECIPIENT}    ${items_in_cart}
 
 Get List From Todoist

@@ -21,7 +21,7 @@ Log In To Todoist
     Wait Until Page Contains    Today    timeout=30s
     Update Settings If Needed
 
-# When testing, we'll receive emails from TODOIST_about a login from a new
+# When testing, we'll receive emails from Todoist about a login from a new
 # device. To avoid raising the alarm we'll only log in when it is needed.
 # Otherwise, we'll resume the previous browser session
 Log In Or Open Todoist Inner

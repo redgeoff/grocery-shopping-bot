@@ -3,7 +3,7 @@
 # Change to root directory so that script can be run from any location
 cd $(dirname $0)/..
 
-# The following doesn't play nice with `--shm-size=1g`
+# The following doesn't play nice with `--shm-size=1g`:
 #   -v $PWD/output/user-data:/opt/robotframework/temp/output/user-data:Z \
 
 # -v $PWD/output:/opt/robotframework/reports:Z \
