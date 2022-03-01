@@ -117,7 +117,7 @@ Add To Cart
         Sleep    4
 
         # Wait enough time for cart addition to settle
-        Wait Until Page Does Not Contain Element    //*[@id='addButton_${item_id}']\
+        Wait Until Page Does Not Contain Element    //*[@id='addButton_${item_id}']
         Wait Until Element Ready    //*[@id='dec_qtyInfo_${item_id}']    timeout=10s
 
         Sleep    1
