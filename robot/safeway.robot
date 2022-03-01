@@ -97,23 +97,32 @@ Load More Items
 Add To Cart
     [Arguments]   ${item_id}
 
-    Dismiss Popups If Needed
+    ${available}=    Run Keyword And Return Status   Page Should Contain Element   //*[@id='addButton_${item_id}']
 
-    Wait Until Element Ready    //*[@id='addButton_${item_id}']
+    # Is the item still available? We want to avoid a race condition where our last attempt
+    # succeeded, but was just very slow and now we are retrying when the item is already in the
+    # cart.
+    IF    '${available}'=='True'
 
-    # Safeway requires a mouse over before the item can be added to the cart
-    Set Focus To Element    //*[@id='addButton_${item_id}']
-    Mouse Over    //*[@id='addButton_${item_id}']
+        Dismiss Popups If Needed
 
-    Click Element When Ready   //*[@id='addButton_${item_id}']
+        Wait Until Element Ready    //*[@id='addButton_${item_id}']
 
-    Sleep    1
+        # Safeway requires a mouse over before the item can be added to the cart
+        Set Focus To Element    //*[@id='addButton_${item_id}']
+        Mouse Over    //*[@id='addButton_${item_id}']
 
-    # Wait enough time for cart addition to settle
-    Wait Until Page Does Not Contain Element    //*[@id='addButton_${item_id}']\
-    Wait Until Element Ready    //*[@id='dec_qtyInfo_${item_id}']    timeout=10s
+        Click Element When Ready   //*[@id='addButton_${item_id}']
 
-    Sleep    4
+        Sleep    4
+
+        # Wait enough time for cart addition to settle
+        Wait Until Page Does Not Contain Element    //*[@id='addButton_${item_id}']\
+        Wait Until Element Ready    //*[@id='dec_qtyInfo_${item_id}']    timeout=10s
+
+        Sleep    1
+
+    END
 
 Buy It Again
     [Arguments]   ${items_to_buy}   ${max_pages}
