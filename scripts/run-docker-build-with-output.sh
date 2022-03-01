@@ -8,4 +8,5 @@ cd $(dirname $0)/..
 docker run --rm \
     --name grocery-shopping-bot \
     --shm-size=1g \
+    -v $PWD/output:/opt/robotframework/reports:Z \
     grocery-ordering-bot
