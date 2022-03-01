@@ -72,10 +72,15 @@ Capture List
     Log   ${items}
     [Return]      ${items}
 
+Sort Buy It Again Items
+    Click Element When Ready    //*[@data-qa='srt-ptns-dflt']
+    Click Link    Recently Purchased
+
 Get Buy It Again Items
     [Arguments]   ${max_pages}
     Go To   ${SAFEWAY_BUY_IT_AGAIN_URL}
     Dismiss Popups If Needed
+    Sort Buy It Again Items
     Load More Items   ${max_pages}
     ${items}=      Capture List
     [Return]    ${items}
