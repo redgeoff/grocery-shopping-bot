@@ -74,7 +74,7 @@ Capture List
 
 Sort Buy It Again Items
     Click Element When Ready    //*[@data-qa='srt-ptns-dflt']
-    Click Link    Recently Purchased
+    Click Link    Frequently Purchased
 
 Get Buy It Again Items
     [Arguments]   ${max_pages}
