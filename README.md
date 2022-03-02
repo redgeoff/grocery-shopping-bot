@@ -9,8 +9,8 @@ sequenceDiagram
     Person->>Alexa: add item
     Alexa->>Todoist: add item
     Todoist->>Person: get items
-    Safeway->>Person: get recently purchased items
-    Person-->>Safeway: add recently purchased item to cart
+    Safeway->>Person: get previously purchased items
+    Person-->>Safeway: add previously purchased item to cart
     Safeway->>Person: searched items
     Person-->>Safeway: add searched item to cart
     Person->>Todoist: mark item as completed
