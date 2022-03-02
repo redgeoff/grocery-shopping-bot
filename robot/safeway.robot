@@ -114,13 +114,12 @@ Add To Cart
 
         Click Element When Ready   //*[@id='addButton_${item_id}']
 
-        Sleep    4
+        # Wait for loading spinner to disappear
+        Wait Until Page Does Not Contain Element    //*[@class='quantity-loading']
 
         # Wait enough time for cart addition to settle
         Wait Until Page Does Not Contain Element    //*[@id='addButton_${item_id}']
         Wait Until Element Ready    //*[@id='dec_qtyInfo_${item_id}']    timeout=10s
-
-        Sleep    1
 
     END
 
