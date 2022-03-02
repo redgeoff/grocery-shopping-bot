@@ -2,6 +2,21 @@
 
 A [Robot Framework](https://robotframework.org/) bot that takes your Alexa shopping list and uses it to populate an online Safeway shopping cart.
 
+## Manual process replaced by bot
+
+```mermaid
+sequenceDiagram
+    Person->>Alexa: add item
+    Alexa->>Todoist: add item
+    Todoist->>Person: get items
+    Safeway->>Person: get recently purchased items
+    Person-->>Safeway: add recently purchased item to cart
+    Safeway->>Person: searched items
+    Person-->>Safeway: add searched item to cart
+    Person->>Todoist: mark item as completed
+    Person->>Safeway: check out
+```
+
 ## Run locally with Docker
 
 First build:
