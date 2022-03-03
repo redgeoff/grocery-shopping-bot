@@ -10,6 +10,7 @@ ${SAFEWAY_HOMEPAGE}     https://www.safeway.com
 ${SAFEWAY_BUY_IT_AGAIN_URL}   https://www.safeway.com/shop/purchases/buy-it-again.html
 ${SAFEWAY_SEARCH_URL}   https://www.safeway.com/shop/search-results.html?q=
 ${SAFEWAY_CART_URL}    https://www.safeway.com/erums/cart
+${SAFEWAY_SIGN_IN_URL}    https://www.safeway.com/account/sign-in.html
 
 *** Keywords ***
 
@@ -45,7 +46,8 @@ Dismiss Popups If Needed
 
 Log In To Safeway
     [Arguments]    ${email}   ${password}
-    Click Link              xpath=//a[contains(@title, 'Shopping Cart')]
+    # Click Link              xpath=//a[contains(@title, 'Shopping Cart')]
+    Go To    ${SAFEWAY_SIGN_IN_URL}
     Wait Until Element Ready    label-email
     Wait Until Element Ready    label-password
     Wait Until Keyword Succeeds    5x    2 sec    Input Text              label-email                   ${email}
