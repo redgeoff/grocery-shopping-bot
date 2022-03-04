@@ -35,6 +35,10 @@ And, to stop (in a separate terminal):
 
 ### Setup
 
+First, read through the [Robot Framework Quick Start](https://dev.to/thebadcoder/robot-framework-quick-start-ui-automation-4966) to set up your development environment, including the Chrome Driver. Then:
+
+    $ git clone https://github.com/redgeoff/grocery-shopping-bot
+    $ cd grocery-shoppping-bot
     $ python3 -m pip install pipenv
     $ python3 -m pipenv shell
     $ pip install pipenv
