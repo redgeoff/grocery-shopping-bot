@@ -17,7 +17,14 @@ sequenceDiagram
     Person->>Safeway: check out
 ```
 
+## Congfigure the robot variables
+
+1. `cp env.robot.default.yml env.robot.yml`
+1. Edit `env.robot.yml` and set the values to match your environment.
+
 ## Run locally with Docker
+
+Make sure that you have already [configured your robot variables](https://github.com/redgeoff/grocery-shopping-bot#congfigure-the-robot-variables).
 
 First build:
 
@@ -43,6 +50,8 @@ First, read through the [Robot Framework Quick Start](https://dev.to/thebadcoder
     $ python3 -m pipenv shell
     $ pip install pipenv
     $ pipenv install
+    
+Make sure that you have already [configured your robot variables](https://github.com/redgeoff/grocery-shopping-bot#congfigure-the-robot-variables).
 
 ### Run
 
@@ -76,8 +85,6 @@ First, read through the [Robot Framework Quick Start](https://dev.to/thebadcoder
 
 1. `cp .env.default.yml .env.dev.yml`
 1. Edit `.env.dev.yml` and set at least one value for `securityGroupIds` and `subnets`. TODO: details on how to navigate the AWS Console to get the security group and subnets. Also set the value for `alexaSkillId` using the Skill ID you collected in the previous section.
-1. `cp env.robot.default.yml env.robot.yml`
-1. Edit `env.robot.yml` and set the values to match your environment.
 
 #### Deploy
 
