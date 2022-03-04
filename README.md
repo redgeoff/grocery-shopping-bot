@@ -32,6 +32,10 @@ First build:
 
 Then run:
 
+    $ ./scripts/run-docker-build-with-output.sh
+    
+or:
+
     $ ./scripts/run-docker-build.sh
 
 And, to stop (in a separate terminal):
