@@ -211,13 +211,12 @@ Find Item And Buy It Again
 
     ${added_to_cart}    ${name_in_store}=    Add Found Items With Buy It Again Badge
 
-    # NOTE: doesn't appear to be a bug anymore
-    # IF  '${added_to_cart}'=='False'
-    #     # There is a bug in the Safeway search that sometimes leads to results missing a Buy It
-    #     # Again Badge. We can workaround this by doing a look up with the buy_it_again_items we
-    #     # retrieved earlier.
-    #     ${added_to_cart}    ${name_in_store}=    Add Found Items In Buy It Again List    ${buy_it_again_items}
-    # END
+    IF  '${added_to_cart}'=='False'
+        # There is a bug in the Safeway search that sometimes leads to results missing a Buy It
+        # Again Badge. We can workaround this by doing a look up with the buy_it_again_items we
+        # retrieved earlier.
+        ${added_to_cart}    ${name_in_store}=    Add Found Items In Buy It Again List    ${buy_it_again_items}
+    END
 
     [Return]    ${added_to_cart}    ${name_in_store}
 
