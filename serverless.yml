@@ -6,6 +6,7 @@ package:
   patterns:
     - "!robot/**"
     - "!.env.*"
+    - "!output/**"
 
 provider:
   name: aws
