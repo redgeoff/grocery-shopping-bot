@@ -2,6 +2,12 @@
 
 A [Robot Framework](https://robotframework.org/) bot that takes your Alexa shopping list and uses it to populate an online Safeway shopping cart.
 
+Check out the blog post at [Grocery Hacking: Automate Your Grocery Shopping Using the Robot Framework](https://betterprogramming.pub/grocery-hacking-automate-your-grocery-shopping-using-the-robot-framework-9444a553f8dc) for why I created this bot.
+
+## [Demo Video](https://www.loom.com/share/fd321cbcaeba4337a6dd593190dff71c)
+
+<a href="https://www.loom.com/share/fd321cbcaeba4337a6dd593190dff71c"><img width="1280" alt="Screen Shot 2022-03-09 at 10 48 47 AM" src="https://user-images.githubusercontent.com/3378986/157511198-e53a1e5d-653f-471f-b979-7dafc823d5e0.png"></a>
+
 ## Manual process replaced by bot
 
 ```mermaid
