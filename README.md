@@ -2,6 +2,12 @@
 
 A [Robot Framework](https://robotframework.org/) bot that takes your Alexa shopping list and uses it to populate an online Safeway shopping cart.
 
+Check out the blog post at [Grocery Hacking: Automate Your Grocery Shopping Using the Robot Framework](https://betterprogramming.pub/grocery-hacking-automate-your-grocery-shopping-using-the-robot-framework-9444a553f8dc) for why I created this bot.
+
+## [Demo Video](https://www.loom.com/share/fd321cbcaeba4337a6dd593190dff71c)
+
+<a href="https://www.loom.com/share/fd321cbcaeba4337a6dd593190dff71c"><img width="1280" alt="Screen Shot 2022-03-09 at 10 48 47 AM" src="https://user-images.githubusercontent.com/3378986/157511198-e53a1e5d-653f-471f-b979-7dafc823d5e0.png"></a>
+
 ## Manual process replaced by bot
 
 ```mermaid
@@ -17,13 +23,24 @@ sequenceDiagram
     Person->>Safeway: check out
 ```
 
+## Congfigure the robot variables
+
+1. `cp env.robot.default.yml env.robot.yml`
+1. Edit `env.robot.yml` and set the values to match your environment.
+
 ## Run locally with Docker
+
+Make sure that you have already [configured your robot variables](https://github.com/redgeoff/grocery-shopping-bot#congfigure-the-robot-variables).
 
 First build:
 
     $ ./scripts/build-docker.sh
 
 Then run:
+
+    $ ./scripts/run-docker-build-with-output.sh
+    
+or:
 
     $ ./scripts/run-docker-build.sh
 
@@ -35,10 +52,16 @@ And, to stop (in a separate terminal):
 
 ### Setup
 
+First, read through the [Robot Framework Quick Start](https://dev.to/thebadcoder/robot-framework-quick-start-ui-automation-4966) to set up your development environment, including the Chrome Driver. Then:
+
+    $ git clone https://github.com/redgeoff/grocery-shopping-bot
+    $ cd grocery-shoppping-bot
     $ python3 -m pip install pipenv
     $ python3 -m pipenv shell
     $ pip install pipenv
     $ pipenv install
+    
+Make sure that you have already [configured your robot variables](https://github.com/redgeoff/grocery-shopping-bot#congfigure-the-robot-variables).
 
 ### Run
 
@@ -72,8 +95,6 @@ And, to stop (in a separate terminal):
 
 1. `cp .env.default.yml .env.dev.yml`
 1. Edit `.env.dev.yml` and set at least one value for `securityGroupIds` and `subnets`. TODO: details on how to navigate the AWS Console to get the security group and subnets. Also set the value for `alexaSkillId` using the Skill ID you collected in the previous section.
-1. `cp env.robot.default.yml env.robot.yml`
-1. Edit `env.robot.yml` and set the values to match your environment.
 
 #### Deploy
 
