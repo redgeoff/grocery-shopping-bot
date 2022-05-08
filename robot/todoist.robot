@@ -12,10 +12,10 @@ ${TODOIST_TODAY_TITLE}    Today: Todoist
 
 Log In To Todoist
     [Arguments]    ${email}   ${password}
-    Wait Until Element Ready    email
-    Wait Until Element Ready    password
-    Input Text              email                   ${email}
-    Input Password          password                ${password}
+    Wait Until Element Ready    element-0
+    Wait Until Element Ready    element-2
+    Input Text              element-0                   ${email}
+    Input Password          element-2                ${password}
     Click Button            Log in
     # Wait Until Location Is  ${TODOIST_TODAY}
     Wait Until Page Contains    Today    timeout=30s
