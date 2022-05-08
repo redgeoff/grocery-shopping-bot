@@ -63,6 +63,21 @@ First, read through the [Robot Framework Quick Start](https://dev.to/thebadcoder
     
 Make sure that you have already [configured your robot variables](https://github.com/redgeoff/grocery-shopping-bot#congfigure-the-robot-variables).
 
+#### ChromeDriver
+
+The ChromeDriver can be installed anywhere on your local computer, but the directory containing it must be added to your `PATH` variable. Here is how I have configured it on my Mac:
+
+    Visit https://sites.google.com/chromium.org/driver/
+    Download the latest stable version
+    Extract it and copy it to grocery-shopping-bot/driver
+    Edit ~/.zshrc and add `export PATH="{PATH_TO_DRIVER}:$PATH"`
+
+You then need to authorize the executable by visiting _Security & Privacy_ -> _General_
+
+    Run `$ grocery-shopping-bot/driver/chromedriver`
+    At the bottom of the _Security & Privacy_ window, there will be the message, '"chromedriver" was blocked from use because it is not from an identified developer'. Click the _Allow Anyway_ button.
+    Run `$ grocery-shopping-bot/driver/chromedriver` again and click the _Open_ button
+
 ### Run
 
     $ python3 -m pipenv shell
