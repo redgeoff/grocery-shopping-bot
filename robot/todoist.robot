@@ -5,17 +5,19 @@ Library           Collections
 Resource          ./common.robot
 
 *** Variables ***
-${TODOIST_TODAY}          https://todoist.com/app/today
-${TODOIST_TODAY_TITLE}    Today: Todoist
+${TODOIST_TODAY}             https://todoist.com/app/today
+${TODOIST_TODAY_TITLE}       Today: Todoist
+${TODOIST_EMAIL_LABEL}       labeled-input-1
+${TODOIST_EMAIL_PASSWORD}    labeled-input-3
 
 *** Keywords ***
 
 Log In To Todoist
     [Arguments]    ${email}   ${password}
-    Wait Until Element Ready    element-0
-    Wait Until Element Ready    element-2
-    Input Text              element-0                   ${email}
-    Input Password          element-2                ${password}
+    Wait Until Element Ready    ${TODOIST_EMAIL_LABEL}
+    Wait Until Element Ready    ${TODOIST_EMAIL_PASSWORD}
+    Input Text              ${TODOIST_EMAIL_LABEL}    ${email}
+    Input Password          ${TODOIST_EMAIL_PASSWORD}    ${password}
     Click Button            Log in
     # Wait Until Location Is  ${TODOIST_TODAY}
     Wait Until Page Contains    Today    timeout=30s
